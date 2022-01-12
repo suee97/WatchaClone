@@ -1,9 +1,9 @@
-package com.example.watchaclone.ui.screens.home
+package com.example.watchaclone.ui.screens.news
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 
 @Composable
-fun HomeScreen() {
-    Text("Home")
+fun NewsScreen() {
+    Text("News Screen")
 }

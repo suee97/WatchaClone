@@ -3,42 +3,35 @@ package com.example.watchaclone
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.ui.res.painterResource
-import com.example.watchaclone.data.models.MoviePoster
-import com.example.watchaclone.ui.screens.home.HomeScreen
+import androidx.compose.material.BottomAppBar
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.example.watchaclone.navigation.BottomNavigationBar
+import com.example.watchaclone.navigation.setUpNavigation
 import com.google.accompanist.pager.ExperimentalPagerApi
 
+@ExperimentalPagerApi
 class MainActivity : ComponentActivity() {
-    @ExperimentalPagerApi
+
+    private lateinit var navController: NavHostController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val a1 = MoviePoster(
-                title = "인셉션",
-                img = painterResource(id = R.drawable.inception_poster)
+            navController = rememberNavController()
+
+            Scaffold(
+                content = {
+                    setUpNavigation(navController = navController)
+                },
+                bottomBar = {
+                    BottomNavigationBar(navController = navController)
+                }
             )
-
-            val a2 = MoviePoster(
-                title = "인셉션",
-                img = painterResource(id = R.drawable.inception_poster)
-            )
-
-            val a3 = MoviePoster(
-                title = "인셉션",
-                img = painterResource(id = R.drawable.inception_poster)
-            )
-
-            val a4 = MoviePoster(
-                title = "인셉션",
-                img = painterResource(id = R.drawable.inception_poster)
-            )
-
-//            MoviePosterSlider(
-//                sliderTitle = "박스오피스 순위",
-//                MoviePosterSliderList = listOf(a1, a2, a3, a4)
-//            )
-
-            HomeScreen()
         }
     }
 }

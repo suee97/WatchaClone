@@ -1,9 +1,9 @@
-package com.example.watchaclone.ui.screens.home
+package com.example.watchaclone.ui.screens.search
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 
 @Composable
-fun HomeScreen() {
-    Text("Home")
+fun SearchScren() {
+    Text("서치")
 }
