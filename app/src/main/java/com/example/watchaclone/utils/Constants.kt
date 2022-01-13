@@ -1,11 +1,16 @@
 package com.example.watchaclone.utils
 
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+
 object Constants {
 
-    val HOME_BASE_URL = "home"
-    val SEARCH_BASE_URL = "search"
-    val RATE_BASE_URL = "rate"
-    val NEWS_BASE_URL = "news"
-    val PROFILE_BASE_URL = "profile"
+    // text
+    val SEMI_TITLE = 24.sp
 
+    // padding
+    val CONTENT_HORIZONTAL_PADDING = 16.dp
+
+    // navigation
+    const val ROOT_ROUTE = "root"
 }

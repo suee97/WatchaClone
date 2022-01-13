@@ -3,35 +3,42 @@ package com.example.watchaclone
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material.BottomAppBar
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
+import androidx.activity.viewModels
+import androidx.compose.material.*
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.watchaclone.data.SharedViewModel
 import com.example.watchaclone.navigation.BottomNavigationBar
 import com.example.watchaclone.navigation.setUpNavigation
-import com.google.accompanist.pager.ExperimentalPagerApi
+import com.example.watchaclone.ui.theme.WatchaCloneTheme
 
-@ExperimentalPagerApi
+
+
 class MainActivity : ComponentActivity() {
 
     private lateinit var navController: NavHostController
+    private val sharedViewModel: SharedViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             navController = rememberNavController()
 
-            Scaffold(
-                content = {
-                    setUpNavigation(navController = navController)
-                },
-                bottomBar = {
-                    BottomNavigationBar(navController = navController)
+            WatchaCloneTheme {
+                Scaffold(
+                    bottomBar = {
+                        BottomNavigationBar(
+                            navController = navController,
+                            viewModel = sharedViewModel
+                        )
+                    }
+                ) {
+                    setUpNavigation(
+                        navController = navController,
+                        viewModel = sharedViewModel
+                    )
                 }
-            )
+            }
         }
     }
 }
