@@ -3,6 +3,7 @@ package com.example.watchaclone.ui.screens.profile
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -30,7 +31,10 @@ fun ProfileScreen(
 ) {
     Scaffold(
         topBar = {
-            ProfileScreenTopBar()
+            ProfileScreenTopBar(
+                navController = navController,
+                viewModel = viewModel
+            )
         },
         content = {
             Column(
@@ -48,7 +52,10 @@ fun ProfileScreen(
 }
 
 @Composable
-fun ProfileScreenTopBar() {
+fun ProfileScreenTopBar(
+    navController: NavHostController,
+    viewModel: SharedViewModel
+) {
     TopAppBar(
         title = {},
         actions = {
@@ -60,7 +67,9 @@ fun ProfileScreenTopBar() {
                     tint = Color.Black
                 )
             }
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = {
+                navController.navigate("profile/setting")
+            }) {
                 Icon(
                     modifier = Modifier.size(30.dp),
                     imageVector = Icons.Filled.Settings,
@@ -118,6 +127,9 @@ fun EditProfileButton(
         modifier = Modifier
             .fillMaxWidth()
             .border(1.dp, Color.Black)
+            .clickable {
+                navController.navigate("profile/editProfile")
+            }
     ) {
         Row(
             modifier = Modifier
