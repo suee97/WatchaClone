@@ -10,9 +10,9 @@ import androidx.navigation.compose.rememberNavController
 import com.example.watchaclone.data.SharedViewModel
 import com.example.watchaclone.navigation.BottomNavigationBar
 import com.example.watchaclone.navigation.setUpNavigation
+import com.example.watchaclone.ui.screens.splash.SplashScreen
 import com.example.watchaclone.ui.theme.WatchaCloneTheme
-
-
+import dagger.hilt.android.AndroidEntryPoint
 
 class MainActivity : ComponentActivity() {
 

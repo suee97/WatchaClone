@@ -5,12 +5,14 @@ import androidx.compose.foundation.clickable
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.watchaclone.data.SharedViewModel
 import com.example.watchaclone.navigation.graph.*
 import com.example.watchaclone.navigation.graph.searchNavGraph
+import com.example.watchaclone.ui.screens.splash.SplashScreen
 import com.example.watchaclone.utils.Constants.ROOT_ROUTE
 
 @Composable
@@ -20,8 +22,12 @@ fun setUpNavigation(
 ) {
     NavHost(
         navController = navController,
-        startDestination = "home_root"
+        startDestination = "splash"
     ) {
+        composable(route = "splash") {
+            SplashScreen(navController = navController)
+        }
+
         homeNavGraph(
             navController = navController,
             viewModel = viewModel
