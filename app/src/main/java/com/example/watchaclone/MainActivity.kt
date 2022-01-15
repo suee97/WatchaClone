@@ -12,6 +12,7 @@ import com.example.watchaclone.navigation.BottomNavigationBar
 import com.example.watchaclone.navigation.setUpNavigation
 import com.example.watchaclone.ui.screens.splash.SplashScreen
 import com.example.watchaclone.ui.theme.WatchaCloneTheme
+import com.google.accompanist.pager.ExperimentalPagerApi
 import dagger.hilt.android.AndroidEntryPoint
 
 class MainActivity : ComponentActivity() {
@@ -19,6 +20,7 @@ class MainActivity : ComponentActivity() {
     private lateinit var navController: NavHostController
     private val sharedViewModel: SharedViewModel by viewModels()
 
+    @ExperimentalPagerApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

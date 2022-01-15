@@ -14,7 +14,9 @@ import com.example.watchaclone.navigation.graph.*
 import com.example.watchaclone.navigation.graph.searchNavGraph
 import com.example.watchaclone.ui.screens.splash.SplashScreen
 import com.example.watchaclone.utils.Constants.ROOT_ROUTE
+import com.google.accompanist.pager.ExperimentalPagerApi
 
+@ExperimentalPagerApi
 @Composable
 fun setUpNavigation(
     navController: NavHostController,
