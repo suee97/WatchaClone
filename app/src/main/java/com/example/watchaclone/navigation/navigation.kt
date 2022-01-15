@@ -25,9 +25,11 @@ fun setUpNavigation(
         startDestination = "splash"
     ) {
         composable(route = "splash") {
-            SplashScreen(navController = navController)
+            SplashScreen(
+                navController = navController,
+                viewModel = viewModel
+            )
         }
-
         homeNavGraph(
             navController = navController,
             viewModel = viewModel

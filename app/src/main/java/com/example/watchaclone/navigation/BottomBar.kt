@@ -23,27 +23,29 @@ fun BottomNavigationBar(
         BottomNavItem.ProfileButton
     )
 
-    BottomNavigation(
-        backgroundColor = Color.White,
-        elevation = 12.dp
-    ) {
-        val navBackStackEntry by navController.currentBackStackEntryAsState()
-        val currentRoute = navBackStackEntry?.destination?.route
+    if (viewModel.bottomBarShown.value) {
+        BottomNavigation(
+            backgroundColor = Color.White,
+            elevation = 12.dp
+        ) {
+            val navBackStackEntry by navController.currentBackStackEntryAsState()
+            val currentRoute = navBackStackEntry?.destination?.route
 
-        items.forEach { item ->
-            BottomNavigationItem(
-                icon = { Icon(imageVector = item.icon, contentDescription = item.label)},
-                label = { Text(text = item.label)},
-                selectedContentColor = Color.Black,
-                unselectedContentColor = Color.LightGray,
-                alwaysShowLabel = true,
-                selected = (checkingNavigation(item, currentRoute)),
-                onClick = {
-                    navController.navigate(item.route[0]) {
-                        popUpTo("${item.route[0]}")
+            items.forEach { item ->
+                BottomNavigationItem(
+                    icon = { Icon(imageVector = item.icon, contentDescription = item.label) },
+                    label = { Text(text = item.label) },
+                    selectedContentColor = Color.Black,
+                    unselectedContentColor = Color.LightGray,
+                    alwaysShowLabel = true,
+                    selected = (checkingNavigation(item, currentRoute)),
+                    onClick = {
+                        navController.navigate(item.route[0]) {
+                            popUpTo("${item.route[0]}")
+                        }
                     }
-                }
-            )
+                )
+            }
         }
     }
 }
@@ -52,8 +54,8 @@ fun checkingNavigation(
     item: BottomNavItem,
     currentRoute: String?
 ): Boolean {
-    for(i in 1..item.route.size) {
-        if(currentRoute == item.route[i-1]) {
+    for (i in 1..item.route.size) {
+        if (currentRoute == item.route[i - 1]) {
             return true
         }
     }

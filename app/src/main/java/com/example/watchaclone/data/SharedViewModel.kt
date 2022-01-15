@@ -19,4 +19,7 @@ class SharedViewModel @Inject constructor() : ViewModel(){
     var userRating = mutableStateOf(410)
     var userComment = mutableStateOf(74)
 
+    // bottom bar hide/show
+    var bottomBarShown = mutableStateOf(false)
+
 }
