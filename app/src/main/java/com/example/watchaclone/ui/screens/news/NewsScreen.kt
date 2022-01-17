@@ -6,11 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.EventAvailable
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -22,6 +18,8 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.pagerTabIndicatorOffset
 import com.google.accompanist.pager.rememberPagerState
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 @ExperimentalPagerApi
 @Composable
@@ -34,44 +32,56 @@ fun NewsScreen(
             NewsScreenTopBar(navController = navController)
         },
         content = {
-            var tabIndex by remember { mutableStateOf(0) }
-            val tabTitles = listOf("내 소식", "친구소식")
-            val pagerState = rememberPagerState()
-
-            Column {
-                TabRow(
-                    selectedTabIndex = tabIndex,
-                    indicator = { tabPositions ->
-                        TabRowDefaults.Indicator(
-                            Modifier.pagerTabIndicatorOffset(
-                                pagerState,
-                                tabPositions
-                            )
-                        )
-                    }
-                ) {
-                    tabTitles.forEachIndexed { i, title ->
-                        Tab(
-                            selected = tabIndex == i,
-                            onClick = { tabIndex = i },
-                            text = { Text(text = title) }
-                        )
-                    }
-                }
-                HorizontalPager(
-                    count = tabTitles.size,
-                    state = pagerState
-                ) { tabIndex ->
-                    Text(
-                        tabIndex.toString(),
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(Color.Green)
-                    )
-                }
-            }
+            NewsScreenContent()
         }
     )
+}
+
+@ExperimentalPagerApi
+@Composable
+fun NewsScreenContent() {
+    val tabTitles = listOf("내 소식", "친구소식")
+    val pagerState = rememberPagerState()
+    val tabIndex = pagerState.currentPage
+    val scope = rememberCoroutineScope()
+
+    Column {
+        TabRow(
+            selectedTabIndex = tabIndex,
+            indicator = { tabPositions ->
+                TabRowDefaults.Indicator(
+                    Modifier.pagerTabIndicatorOffset(
+                        pagerState,
+                        tabPositions
+                    )
+                )
+            }
+        ) {
+            tabTitles.forEachIndexed { index, title ->
+                Tab(
+                    selected = (tabIndex == index),
+                    onClick = {
+                        scope.launch {
+                            pagerState.animateScrollToPage(index)
+                        }
+                    },
+                    text = { Text(text = title) }
+                )
+            }
+        }
+        HorizontalPager(
+            count = tabTitles.size,
+            state = pagerState
+        ) { tabIndex ->
+            Text(
+                text = "curPage = ${pagerState.currentPage}" +
+                        "tabIndex = ${tabIndex.toString()}",
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.Green)
+            )
+        }
+    }
 }
 
 @Composable
@@ -94,7 +104,8 @@ fun NewsScreenTopBar(
             }) {
                 Icon(
                     imageVector = Icons.Filled.EventAvailable,
-                    contentDescription = "Event Available"
+                    contentDescription = "Event Available",
+                    tint = Color.Black
                 )
             }
         }

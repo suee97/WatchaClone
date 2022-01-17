@@ -10,8 +10,11 @@ object Constants {
     val TOP_BAR_FONT_SIZE = 20.sp
 
     // padding
-    val CONTENT_HORIZONTAL_PADDING = 16.dp
+    val CONTENT_HORIZONTAL_PADDING = 12.dp
 
     // navigation
     const val ROOT_ROUTE = "root"
+
+    // image
+    val POSTER_SIZE = 110.dp
 }
